@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <memory>
 
 namespace Ui {
 class MainWindow;
@@ -12,10 +13,14 @@ class MainWindow : public QMainWindow {
 
 public:
 	explicit MainWindow(QWidget *parent = nullptr);
-	~MainWindow();
+	~MainWindow() override;
+	MainWindow(const MainWindow &) = delete;
+	MainWindow(const MainWindow &&) = delete;
+	MainWindow &operator=(const MainWindow &) = delete;
+	MainWindow &operator=(const MainWindow &&) = delete;
 
 private:
-	Ui::MainWindow *ui;
+	std::unique_ptr<Ui::MainWindow> ui;
 };
 
 #endif  // MAINWINDOW_H
